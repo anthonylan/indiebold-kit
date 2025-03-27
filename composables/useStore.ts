@@ -52,6 +52,8 @@ const store = shallowReactive({
   },
   logout() {
     useAuth().signOut()
+    localStorage.removeItem('org_id')
+
     store.user = {}
     navigateTo('/login')
   }
