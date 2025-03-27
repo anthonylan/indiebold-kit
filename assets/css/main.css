@@ -1,0 +1,62 @@
+
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* dm: Dark Mode */
+:root{
+    --font-family: "Nunito", sans-serif;
+    --blue: #193DB0;
+    --dark: rgb(14, 18, 27);
+    --gray: #99a0ae;
+    --gray-soft: #717784;
+    --dm-line: hsl(221.25 15.69% 20%);
+    --dark-soft: #181b25;
+}
+
+html, body{
+    font-family: var(--font-family);
+    background-color: #fff;
+}
+.dark, .dark body{
+  background: var(--dark);
+  color: var(--gray);
+}
+
+/* Menu separator style */
+.menu-separator {
+    border: none;
+    background: linear-gradient(
+      90deg,
+      currentColor 4px,
+      transparent 4px
+    )
+    50% 50% / 8px 1px repeat no-repeat;
+    color: rgba(204, 204, 204, 1);
+    height: 0.25rem;
+    margin: 0.5rem 0;
+ }
+
+ .dark .menu-separator{
+  color: var(--gray-soft);
+ }
+
+
+
+  .spinning-icon {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

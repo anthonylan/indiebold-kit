@@ -1,0 +1,108 @@
+<template>
+  <aside :class="[styleSheet.card, 'w-[250px] h-screen fixed left-0 top-0 z-40 flex flex-col gap-3 border-r']">
+    <div :class="[styleSheet.border, 'flex items-center gap-3 h-20 border-b px-4']">
+        <img src="../assets/images/logo-icon.svg" width="50"  alt="">
+        <span :class="[styleSheet.title]" class="text-xl font-black">logo here</span>
+    </div>
+
+    <!-- links -->
+    <nav class="flex flex-col overflow-y-auto flex-1 px-2" @click="stateMemory.userMenu = false">
+      <ul class="flex flex-col flex-1 gap-1 mt-2">
+        <li v-for="link in links">
+          <span v-if="link.seperator" class="flex text-sm text-gray-500 font-medium m-3">{{ link.seperator }}</span>
+
+          <NuxtLink :to="link.path" class="text-gray-800 border border-transparent rounded-lg flex gap-3 items-center p-1.5 px-4" 
+         :class="[link.path == route.path ? 'bg-gray-100 hover:bg-gray-100 dark:bg-[var(--dark-soft)]' : '', styleSheet.hoverItem]">
+            <i class="text-xl" :class="link.icon"></i>
+            <span class="text-md font-normal flex-1">{{ link.name }}</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </nav>  
+
+    <!-- User Tab -->
+    <div class="flex items-center gap-2 p-2 select-none m-3" @click="stateMemory.userMenu = !stateMemory.userMenu" :class="[styleSheet.hoverItem]">
+      <div class="size-7" :class="[styleSheet.avatarCover]">
+          <img :src="avatarUrl(store.user)" :alt="store.user?.email" class="w-full h-full object-cover">
+      </div>
+        <span class="font-medium text-md flex-1 truncate">{{ store.user?.user_metadata?.display_name }}</span>
+        <i class="ri-arrow-right-s-line text-2xl"></i>
+    </div>
+</aside>
+
+<UserMenu v-show="stateMemory.userMenu" 
+  @newTeam="toggleModalbyMenu('showTeam')" 
+  @newOrg="toggleModalbyMenu('showOrgForm')" 
+/>
+
+<Modal v-model="keys.showOrgForm">
+  <OrganizationForm 
+    @close="keys.showOrgForm = false"  
+    @error="($event) => toast.add({ msg: $event, type: 'error' })" />
+</Modal>
+
+<Modal v-model="keys.showTeam">
+   <InvitationForm 
+   @close="keys.showTeam = false" 
+   @error="($event) => toast.add({ msg: $event, type: 'error' })" />
+</Modal>
+
+<Toast />
+
+
+
+</template>
+
+
+
+<script lang="ts" setup>
+const store = useStore()
+const toast = useToast()
+const route = useRoute();
+
+
+import { avatarUrl, stateMemory } from '#imports';
+import styleSheet from '~/scripts/styleSheet';
+import UserMenu from './UserMenu.vue';
+
+const links = ref([
+  { name: 'Home', path: '/home', icon: 'ri-home-line' },
+  { name: 'Billing', path: '/settings/billing', icon: 'ri-vip-crown-2-line', seperator: 'Settings' },
+  { name: 'Members', path: '/settings/members', icon: 'ri-group-3-line' },
+  { name: 'Account', path: '/settings/account', icon: 'ri-user-3-line' },
+  { name: 'Danger', path: '/settings/danger', icon: 'ri-door-lock-line' },
+])
+
+
+
+const keys = ref({
+  showTeam: false,
+  showOrgForm: false,
+})
+
+
+const toggleModalbyMenu = (value: 'showTeam' | 'showOrgForm') => {
+  stateMemory.userMenu = false
+  setTimeout(() =>  keys.value[value] = true, 300);
+}
+
+
+
+onMounted(() => {
+  store.syncUser()
+  store.syncOrgs()
+
+  setTimeout(() => {
+    if(!store.selectedOrg?.id) keys.value.showOrgForm = true
+  }, 1000);
+})
+
+
+</script>
+
+
+<style>
+
+
+
+</style>
