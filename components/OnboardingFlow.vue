@@ -10,10 +10,16 @@ const form = ref({ }) as any
 const loading = ref(false)
 
 onMounted( async() => {
-  const sp = store.user?.user_metadata as any
+  store.syncUser()
+})
+
+watchEffect(() => {
+  if(store.user){
+    const sp = store.user?.user_metadata as any
   
-  form.value['display_name'] = sp?.name || sp?.display_name
-  form.value['country'] = sp?.country
+    form.value['display_name'] = sp?.name || sp?.display_name
+    form.value['country'] = sp?.country
+  }
 })
 
 
