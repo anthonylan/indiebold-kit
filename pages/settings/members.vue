@@ -8,11 +8,10 @@ const store = useStore()
 const toast = useToast()
 
 const { workSpaceMembers, delTeam, fetchTeamMembers, syncUserId, handleTeamDeletion } = useTeam();
-const showTeam = ref(false);
 const loading = ref(true)
 
 watchEffect(() => {
-  if (store.selectedOrg) {
+  if (store.selectedOrg?.id) {
     syncUserId();
     fetchTeamMembers();  
 
@@ -84,7 +83,7 @@ const combineSearchAndStatusFilters = computed(() => {
 
  <!-- top header -->
  <TopHeader title="Members" :loading="loading">
-      <ButtonBase variant="primary" icon="ri-add-large-line" @click="showTeam = true" :disabled="store.userLevel?.role > 0">Add Member</ButtonBase>
+      <ButtonBase variant="primary" icon="ri-add-large-line" @click="stateMemory.showTeam = true" :disabled="store.userLevel?.role > 0 || !store.selectedOrg?.id">Add Member</ButtonBase>
   </TopHeader>
 
 
@@ -176,8 +175,8 @@ const combineSearchAndStatusFilters = computed(() => {
 
 
 <!-- invitation modal -->
-<Modal v-model="showTeam">
-     <InvitationForm @close="showTeam = false" @error="($event) => toast.add({ msg: $event, type: 'error' })" />
+<Modal v-model="stateMemory.showTeam">
+     <InvitationForm @close="stateMemory.showTeam = false" @error="($event) => toast.add({ msg: $event, type: 'error' })" />
 </Modal>
 
 

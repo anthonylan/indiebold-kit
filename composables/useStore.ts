@@ -6,6 +6,8 @@ interface Team {
   uid?: string 
 }
 
+import { stateMemory } from '#imports';
+
 const store = shallowReactive({
   user: {} as import('@supabase/supabase-js').User | any,
   organizations: [] as any,
@@ -16,27 +18,30 @@ const store = shallowReactive({
     const { fetchUser } = useAuth()
 
     // Fetch latest user data
-    const { data } = await fetchUser()
+    const { data } = await fetchUser()    
     store.user = data?.user || {}
   },
 
 
   //sync organization
   async syncOrgs() {
-    const { fetchUserWorkspaces } = useDatabase()
+    const { fetchUserLinkedOrgs } = useDatabase()    
 
     // Fetch latest user organizations
-    const { data } = await fetchUserWorkspaces(store.user?.email as string)
-    store.organizations = data || []
-  
+    const { data } = await fetchUserLinkedOrgs(store.user?.email as string)    
+    store.organizations = data    
 
+
+    //prompt the user to create a new organization
+    if(data?.length == 0) stateMemory.showOrgForm = true
+
+    
     const savedOrganization = store.organizations.find((item: any) => item.id == localStorage.getItem('org_id'))
-
     if(savedOrganization && savedOrganization.id){
       return store.setCurrentOrganizzation(savedOrganization)
     }
 
-      //set default workspace
+    //set default organization
     if(!store.selectedOrg?.name && store.organizations?.length > 0) {
         store.setCurrentOrganizzation(store.organizations[0])
      }

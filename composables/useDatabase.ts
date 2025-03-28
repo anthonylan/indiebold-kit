@@ -25,15 +25,17 @@ export const useDatabase = () => {
     }
 
     //Specilized Queries
-    const fetchUserWorkspaces = async (email: string) => {
+    const fetchUserLinkedOrgs = async (email: string) => {      
+      if(!email) return { data: [] }
+
       const { data, error } = await supabase
       .from('orgs')
       .select('*')
-      .contains('team', JSON.stringify([{'email': email}]))
+      .contains('team', JSON.stringify([{'email': email}]))      
 
       return { data, error: error?.message }
     }
   
-    return { fetchRecords, insertRecord, upsertRecord, fetchUserWorkspaces, updateRecord }
+    return { fetchRecords, insertRecord, upsertRecord, fetchUserLinkedOrgs, updateRecord }
   }
   

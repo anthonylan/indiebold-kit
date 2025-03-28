@@ -9,15 +9,11 @@ definePageMeta({
 
 const loading = ref(true)
 const store  = useStore()
-const isUserOnboarded = computed(() => {
-  return !store.user?.user_metadata?.boarded || store.organizations.length == 0
-})
+const isUserOnboarded = computed(() =>  !store.user?.user_metadata?.boarded)
 
 
 onMounted(() => {
-  store.syncOrgs()
-
-  loading.value = isUserOnboarded.value
+  loading.value = isUserOnboarded.value  
 
   setTimeout(() => {
     loading.value = false
@@ -31,20 +27,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <TopHeader title="" :loading="loading" />
+  <TopHeader title="Home" :loading="loading" />
+  <ClientOnly><Navigation  /></ClientOnly>
+
 
   <!-- onboarding screen -->
-  <section v-if="isUserOnboarded">
-      <OnboardingFlow />
-  </section>
+   <OnboardingFlow v-if="isUserOnboarded" />
 
 
 
-  <section v-else>
-    <ClientOnly><Navigation  /></ClientOnly>
-
-
-    <main :class="[styleSheet.container, 'py-10']">
+    <main v-else :class="[styleSheet.container, 'py-10']">
       <div class="flex flex-col gap-5 max-w-2xl">
         <img src="~/assets/images/ab.svg" width="200" alt="welcome">
         <h2 class="text-2xl font-bold dark:text-white">Welcome on board</h2>
@@ -54,7 +46,6 @@ onMounted(() => {
       </div>
     </main>
 
-  </section>
 
 </template>
 

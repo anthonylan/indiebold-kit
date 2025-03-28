@@ -15,7 +15,7 @@
   </div>
 
   <!-- current organization -->
-  <div :class="styleSheet.umenu.row">
+  <div :class="styleSheet.umenu.row" v-if="store.selectedOrg?.id">
     <span :class="[styleSheet.umenu.label, styleSheet.hl]">current organization</span>
 
     <div :class="[styleSheet.umenu.link, styleSheet.hoverItem]" @click="editMode = true" v-if="!editMode">

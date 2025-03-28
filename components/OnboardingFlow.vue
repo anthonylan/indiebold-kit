@@ -9,12 +9,9 @@ const toast = useToast()
 const form = ref({ }) as any
 const loading = ref(false)
 
-onMounted( async() => {
-  store.syncUser()
-})
 
 watchEffect(() => {
-  if(store.user){
+  if(store.user?.email){
     const sp = store.user?.user_metadata as any
   
     form.value['display_name'] = sp?.name || sp?.display_name
@@ -69,7 +66,7 @@ const handleNext = async () => {
 </script>
 
 <template>
-    <div>
+    <div class="fixed z-999 bg-white h-screen w-full top-0 overflow-y-auto">
       <form @submit.prevent="handleSubmit" class="max-w-md m-auto pb-10 px-10">
         <div class="flex flex-col gap-2 text-center p-4">
             <img src="~/assets/images/ask.svg" width="140" alt="ballon" class="mx-auto">

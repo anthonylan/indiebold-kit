@@ -48,7 +48,7 @@ const handleUpload = async (event: any) => {
 
 
  watchEffect(() => {
-  if(store.user){
+  if(store.user?.email){
     email.value = store.user.email as string
     
     Object.entries(store?.user?.user_metadata || {}).forEach(([key, value]) => {

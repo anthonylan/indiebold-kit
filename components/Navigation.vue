@@ -35,15 +35,15 @@
   @newOrg="toggleModalbyMenu('showOrgForm')" 
 />
 
-<Modal v-model="keys.showOrgForm">
+<Modal v-model="stateMemory.showOrgForm">
   <OrganizationForm 
-    @close="keys.showOrgForm = false"  
+    @close="stateMemory.showOrgForm = false"  
     @error="($event) => toast.add({ msg: $event, type: 'error' })" />
 </Modal>
 
-<Modal v-model="keys.showTeam">
+<Modal v-model="stateMemory.showTeam">
    <InvitationForm 
-   @close="keys.showTeam = false" 
+   @close="stateMemory.showTeam = false" 
    @error="($event) => toast.add({ msg: $event, type: 'error' })" />
 </Modal>
 
@@ -74,31 +74,22 @@ const links = ref([
 ])
 
 
-
-const keys = ref({
-  showTeam: false,
-  showOrgForm: false,
-})
-
-
 const toggleModalbyMenu = (value: 'showTeam' | 'showOrgForm') => {
   closeAllMenus()
-  setTimeout(() =>  keys.value[value] = true, 300);
+  setTimeout(() =>  stateMemory[value] = true, 300);
 }
-
-
-
 
 
 onMounted(() => {
   store.syncUser()
-  store.syncOrgs()
-
-  setTimeout(() => {
-    if(!store.selectedOrg?.id) keys.value.showOrgForm = true
-  }, 1000);
 })
 
+
+watchEffect(() => {
+  if(store.user?.email){
+   store.syncOrgs()
+  }
+})
 
 </script>
 
