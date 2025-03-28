@@ -33,7 +33,7 @@ export default {
         link: `flex items-center gap-2 h-10 px-2.5 group hover:bg-gray-100`,
         row: `flex flex-col p-2 px-0 border-b border-gray-200 dark:border-[var(--dm-line)]`,
         label: `uppercase text-xs font-bold m-2`,
-        content: `w-[300px] flex flex-col fixed left-3 md:left-[260px] bottom-20 md:bottom-3 z-99 border shadow p-1`
+        content: `w-[300px] flex flex-col fixed left-3 md:left-[260px] bottom-30 md:bottom-3 z-99 border shadow p-1`
     },
     border: `border-gray-200 dark:border-[var(--dm-line)]`,
     card: `border-gray-200 bg-white rounded-lg dark:bg-[var(--dark)] dark:border-[var(--dm-line)]`,

@@ -21,7 +21,7 @@
     </nav>  
 
     <!-- User Tab -->
-    <div class="flex items-center gap-2 p-2 select-none m-2 mb-30 md:mb-3 h-12" @click="stateMemory.userMenu = !stateMemory.userMenu" :class="[styleSheet.hoverItem]">
+    <div class="flex items-center gap-2 p-2 select-none m-2 mb-20 md:mb-3 h-12" @click="stateMemory.userMenu = !stateMemory.userMenu" :class="[styleSheet.hoverItem]">
       <div class="size-7" :class="[styleSheet.avatarCover]">
           <img :src="avatarUrl(store.user)" :alt="store.user?.email" :class="[styleSheet.avatarImg]" referrerpolicy="no-referrer">
       </div>
