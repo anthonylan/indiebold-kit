@@ -60,7 +60,7 @@ const store = shallowReactive({
     localStorage.removeItem('org_id')
 
     store.user = {}
-    navigateTo('/login')
+    location.href = '/login'
   }
 })
 

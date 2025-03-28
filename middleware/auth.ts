@@ -25,7 +25,7 @@ export default defineNuxtRouteMiddleware(async () => {
     // Now make the redirect decision
     if (!data.session) {
       console.log("Still no session, redirecting to login")
-      return navigateTo('/login')
+      return location.href = '/login'
     }
     
     console.log("Session found, user is authenticated")

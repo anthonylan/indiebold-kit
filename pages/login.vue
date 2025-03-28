@@ -41,7 +41,6 @@ import Wrapper from '~/components/Wrapper.vue'
 
 const { signIn } = useAuth()
 const toast = useToast()
-const supabase = useSupabase()
 
 const form = ref({ email: '', password: '' })
 const loading = ref(false)
@@ -57,13 +56,5 @@ const submit = async () => {
 
   location.href = `${location.origin}/home`
 }
-
-
-
-//For good user experience, go to home if user is not logged out
-onMounted(async () => {
-  const { data } = await supabase.auth.getSession()  
-  if(data?.session) location.href = '/home'
-})
 
 </script>
