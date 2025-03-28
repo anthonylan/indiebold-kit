@@ -26,7 +26,7 @@ const avatarUrl = (user: any) => {
 }
 
 const defAvatar = (title: any) =>  `${skinUrl}/initials/svg?seed=${title?.charAt(0) || 'default'}`
-const stateMemory = reactive({ userMenu: false })
+const stateMemory = reactive({ userMenu: false, mobileMenu: false })
 
 
 const handleOrgCreation = async (owner: any, orgName: string) => {
@@ -49,5 +49,11 @@ const handleOrgCreation = async (owner: any, orgName: string) => {
   return { data, error }
 }
 
-export { avatarUrl, roles, dayjs, defAvatar, stateMemory, handleOrgCreation }
+
+const closeAllMenus = () => {
+  stateMemory.mobileMenu = false
+  stateMemory.userMenu = false
+}
+
+export { avatarUrl, roles, dayjs, defAvatar, stateMemory, handleOrgCreation, closeAllMenus }
 

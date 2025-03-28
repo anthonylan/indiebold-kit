@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="handleSubmit" class="flex flex-col p-5 gap-4 m-auto w-[680px]">
+    <form @submit.prevent="handleSubmit" class="flex flex-col p-5 gap-4 m-auto w-full md:w-[680px]">
         <div class="flex flex-col gap-1">
             <h2 class="text-xl font-bold" :class="[styleSheet.title]">Invite others to {{ store.selectedOrg?.name }}</h2>
             <p class="text-sm">Invite others to collaborate in IndieBold! Due to high demand, invites are limited to 3 per organization. Regardless of delivery, teammates will join your org when they sign up with the invited email.</p>

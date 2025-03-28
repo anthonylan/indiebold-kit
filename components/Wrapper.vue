@@ -11,7 +11,7 @@
           <div :class="[styleSheet.form.wrapper]">
             <div class="text-center">
               <div class="relative flex mx-auto size-24 shrink-0 items-center justify-center rounded-full before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-neutral-500 before:to-transparent before:opacity-10">
-                <div class="relative z-10 flex size-12 items-center justify-center rounded-full bg-white shadow-regular-xs ring-1 ring-inset ring-neutral-200 lg:size-16 dark:bg-[var(--dark)] dark:ring-[var(--dm-line)]">
+                <div class="relative z-10 flex items-center justify-center rounded-full bg-white ring-1 ring-inset ring-neutral-200 size-16 dark:bg-[var(--dark)] dark:ring-[var(--dm-line)]">
                   <i :class="[icon, 'text-3xl text-gray-600 dark:text-[var(--gray)]']"></i>                
                 </div>
               </div>

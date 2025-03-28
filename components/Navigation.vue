@@ -1,20 +1,20 @@
 <template>
-  <aside :class="[styleSheet.card, 'w-[250px] h-screen fixed left-0 top-0 z-40 flex flex-col gap-3 border-r']">
+  <aside :class="[styleSheet.card, styleSheet.sidebar.content, stateMemory.mobileMenu ? '-translate-x-0' : '-translate-x-[300px]']">
     <div :class="[styleSheet.border, 'flex items-center gap-3 h-20 border-b px-4']">
         <img src="../assets/images/logo-icon.svg" width="50"  alt="">
         <span :class="[styleSheet.title]" class="text-xl font-black">logo here</span>
     </div>
 
     <!-- links -->
-    <nav class="flex flex-col overflow-y-auto flex-1 px-2" @click="stateMemory.userMenu = false">
+    <nav class="flex flex-col overflow-y-auto flex-1 px-2" @click="closeAllMenus">
       <ul class="flex flex-col flex-1 gap-1 mt-2">
         <li v-for="link in links">
           <span v-if="link.seperator" class="flex text-sm text-gray-500 font-medium m-3">{{ link.seperator }}</span>
 
-          <NuxtLink :to="link.path" class="text-gray-800 border border-transparent rounded-lg flex gap-3 items-center p-1.5 px-4" 
+          <NuxtLink :to="link.path" class="text-gray-800 border border-transparent rounded-lg flex gap-2 items-center p-1.5 px-3" 
          :class="[link.path == route.path ? 'bg-gray-100 hover:bg-gray-100 dark:bg-[var(--dark-soft)]' : '', styleSheet.hoverItem]">
             <i class="text-xl" :class="link.icon"></i>
-            <span class="text-md font-normal flex-1">{{ link.name }}</span>
+            <span class="text-md font-normal flex-1 translate-y-[2px]">{{ link.name }}</span>
           </NuxtLink>
         </li>
       </ul>
@@ -23,7 +23,7 @@
     <!-- User Tab -->
     <div class="flex items-center gap-2 p-2 select-none m-3" @click="stateMemory.userMenu = !stateMemory.userMenu" :class="[styleSheet.hoverItem]">
       <div class="size-7" :class="[styleSheet.avatarCover]">
-          <img :src="avatarUrl(store.user)" :alt="store.user?.email" class="w-full h-full object-cover">
+          <img :src="avatarUrl(store.user)" :alt="store.user?.email" :class="[styleSheet.avatarImg]" referrerpolicy="no-referrer">
       </div>
         <span class="font-medium text-md flex-1 truncate">{{ store.user?.user_metadata?.display_name }}</span>
         <i class="ri-arrow-right-s-line text-2xl"></i>
@@ -61,7 +61,7 @@ const toast = useToast()
 const route = useRoute();
 
 
-import { avatarUrl, stateMemory } from '#imports';
+import { avatarUrl, stateMemory, closeAllMenus } from '#imports';
 import styleSheet from '~/scripts/styleSheet';
 import UserMenu from './UserMenu.vue';
 
@@ -82,9 +82,11 @@ const keys = ref({
 
 
 const toggleModalbyMenu = (value: 'showTeam' | 'showOrgForm') => {
-  stateMemory.userMenu = false
+  closeAllMenus()
   setTimeout(() =>  keys.value[value] = true, 300);
 }
+
+
 
 
 

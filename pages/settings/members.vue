@@ -3,7 +3,7 @@ definePageMeta({ middleware: ['auth'] });
 
 
 import styleSheet from '~/scripts/styleSheet';
-import { avatarUrl, roles, dayjs, stateMemory } from '#imports';
+import { avatarUrl, roles, dayjs, closeAllMenus } from '#imports';
 const store = useStore()
 const toast = useToast()
 
@@ -89,26 +89,27 @@ const combineSearchAndStatusFilters = computed(() => {
 
 
   <!-- main content-->
- <main :class="[styleSheet.container]" @click="stateMemory.userMenu = false">
+ <main :class="[styleSheet.container]" @click="closeAllMenus()">
 
   <!-- top actions -->
-   <div class="flex items-center gap-4">
+   <div class="flex md:items-center gap-4 flex-col md:flex-row">
         <div class="flex flex-1">
           <ButtonTabs :tabs="['All', 'Active', 'Absent']" v-model="keys.tab" @change="handleTabs" />
          </div>
-         <div class="flex justify-end gap-3">
-          <div class="flex relative group w-[300px]">
+         <div class="flex md:justify-end gap-3">
+          <div class="flex relative group flex-1">
             <input placeholder="Search email..." v-model="keys.search" :class="[styleSheet.form.input, `pl-10`]" @input="searchUsers" />
             <i :class="[styleSheet.form.icon, 'ri-search-line left-3']"></i>
           </div>
           <ButtonBase variant="secondary" icon="ri-filter-line">Filter</ButtonBase>
-          <div class="w-[140px]">
+          <div class="w-[140px] hidden md:block">
             <CustomSelect v-model="keys.sortby" :options="sorting" icon="ri-sort-alphabet-asc" @change="sortMembers(keys.sortby)" />
           </div>
       </div>
    </div>
 
    <!-- member's table -->
+    <div class="max-w-full overflow-x-auto">
     <table :class="[styleSheet.table.main]">
       <thead>
         <tr>
@@ -125,7 +126,7 @@ const combineSearchAndStatusFilters = computed(() => {
           <td :class="[styleSheet.table.body.td]">
             <div class="flex items-center gap-3">
               <div class="size-10" :class="[styleSheet.avatarCover]">
-                <img :src="avatarUrl(member)" :alt="member?.user_metadata?.display_name || 'N/A'" class="object-cover w-full h-full" />
+                <img :src="avatarUrl(member)" :alt="member?.user_metadata?.display_name || 'N/A'" :class="[styleSheet.avatarImg]" referrerpolicy="no-referrer" />
               </div>
               <div class="flex flex-col">
                 <p class="block text-sm font-bold antialiased" :class="[styleSheet.title]">
@@ -167,6 +168,7 @@ const combineSearchAndStatusFilters = computed(() => {
         </tr>
       </tbody>
     </table> 
+  </div>
 
 </main>
 

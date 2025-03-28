@@ -70,7 +70,7 @@ const handleNext = async () => {
 
 <template>
     <div>
-      <form @submit.prevent="handleSubmit" class="max-w-md m-auto pb-10">
+      <form @submit.prevent="handleSubmit" class="max-w-md m-auto pb-10 px-10">
         <div class="flex flex-col gap-2 text-center p-4">
             <img src="~/assets/images/ask.svg" width="140" alt="ballon" class="mx-auto">
             <h1 class="text-2xl font-bold" :class="[styleSheet.title]">Almost done!</h1>

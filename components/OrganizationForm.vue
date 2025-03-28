@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col p-5 w-[450px]">
+    <div class="flex flex-col p-5 w-full md:w-[450px] mx-auto">
         <div class="flex items-start">
             <div class="flex flex-col flex-1">
                 <h1 class="text-xl font-bold" :class="[styleSheet.title]">Create an organization </h1>

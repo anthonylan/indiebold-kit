@@ -3,6 +3,7 @@ definePageMeta({ middleware: ['auth'] });
 
 import { table } from '~/scripts/data';
 import styleSheet from '~/scripts/styleSheet';
+import { closeAllMenus } from '#imports';
 
 const store = useStore();
 const { fetchSubscriptions, usePortal, useCheckout, useSwitch } = useBillingApi();
@@ -69,7 +70,7 @@ watchEffect(() => {
 
 
 
-<main :class="[styleSheet.container]" @click="stateMemory.userMenu = false">
+<main :class="[styleSheet.container]" @click="closeAllMenus()">
 
   <!-- Non organization oner -->
   <section class="max-w-2xl" v-if="store.userLevel?.role > 0">
@@ -87,15 +88,15 @@ watchEffect(() => {
 
     <div class="p-0 mt-5" v-if="defaultSub?.name">
       <div class="flex flex-col gap-5 p-5 border" :class="[styleSheet.card]">
-        <div class="flex items-end">
+        <div class="flex items-end flex-col md:flex-row">
           <div class="flex gap-10 flex-1">
           <div class="flex flex-col gap-1" v-for="(item, index) in subGrid">
             <p class="text-sm capitalize" :class="[styleSheet.hl]">{{ item.title }}</p>
             <p class="text-md">{{ item?.value }}</p>
           </div>
         </div>
-        <div class="flex justify-end">
-          <ButtonBase variant="primary" icon="ri-money-dollar-circle-line" :loading="loading" @click="handlePortal">Manage</ButtonBase>
+        <div class="flex justify-end w-full md:w-auto pt-4">
+          <ButtonBase variant="primary" icon="ri-money-dollar-circle-line" :loading="loading" @click="handlePortal" class="w-full">Manage</ButtonBase>
         </div>
         </div>
       </div>
@@ -107,7 +108,7 @@ watchEffect(() => {
   <!-- Pricing -->    
     <div class="grid grid-cols-1  gap-6 mt-6">
         <div class="flex flex-col gap-2 p-4 rounded-lg border " :class="[styleSheet.card]" v-for="item in table">
-            <div class="flex items-center">
+            <div class="flex md:items-center flex-col md:flex-row gap-2">
                 <h2 class="text-xl font-medium flex-1 ">{{ item.name }}</h2>
                 <div class="flex" v-if="item.prices.length > 1">
                   <ButtonTabs :tabs="['Pay monthly', 'Pay yearly']" v-model="keys.cycle" @change="handleTabs" />

@@ -3,7 +3,7 @@ definePageMeta({ middleware: ['auth'] });
 
 
 import styleSheet from '~/scripts/styleSheet';
-import { avatarUrl } from '#imports';
+import { avatarUrl, closeAllMenus } from '#imports';
 
 const { updateUser } = useAuth()
 const { del, upload }  = useStorage('avatars')
@@ -65,13 +65,13 @@ const handleUpload = async (event: any) => {
  <TopHeader title="User profile" />
 
 
- <main :class="[styleSheet.container]" @click="stateMemory.userMenu = false">
+ <main :class="[styleSheet.container]" @click="closeAllMenus()">
 
      <!-- avatar -->
       <div :class="['flex flex-col pb-4 gap-4']">
-         <div class="flex gap-3 items-center">
+         <div class="flex gap-3 md:items-center flex-col md:flex-row">
           <div  class="size-26" :class="[styleSheet.avatarCover]">
-            <ClientOnly><img :src="avatarUrl(store.user)" class="w-full h-full object-cover" alt="avatar"></ClientOnly>
+            <ClientOnly><img :src="avatarUrl(store.user)" :class="[styleSheet.avatarImg]" alt="avatar" referrerpolicy="no-referrer"></ClientOnly>
           </div>
           <div class="flex flex-col">
             <h2 class="text-lg font-bold" :class="[styleSheet.title]">Custom avatar</h2>

@@ -1,7 +1,7 @@
 <template>
     <Wrapper title="New password" icon="ri-door-lock-fill" subtitle="Password should be 6-12 characters and include at least two of the following: uppercase, lowercase, number, or symbol.">
       <template #link>
-        <p class="text-md text-gray-600">Refreshing this page will invalidate your session</p>
+        <p :class="[styleSheet.form.htext]">Refreshing will invalidate your session</p>
       </template>
       <template #form> 
         <div v-if="showForm">
@@ -28,6 +28,7 @@
   
 <script lang="ts" setup>
   import Wrapper from '~/components/Wrapper.vue'
+import styleSheet from '~/scripts/styleSheet'
   
   const { updatePassword } = useAuth()
   const supabase = useSupabase()

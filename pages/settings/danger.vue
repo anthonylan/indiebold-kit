@@ -2,6 +2,7 @@
 definePageMeta({ middleware: ['auth'] });
 
 import styleSheet from '~/scripts/styleSheet';
+import { closeAllMenus } from '#imports';
 const supabase  = useSupabase()
 
 const store = useStore()
@@ -50,7 +51,7 @@ onMounted(() => {
     <TopHeader title="Danger zone" :loading="keys.loading" />
 
 
-    <main :class="[styleSheet.container]" @click="stateMemory.userMenu = false">
+    <main :class="[styleSheet.container]" @click="closeAllMenus()">
         <form @submit.prevent="handleDeletion" class="max-w-xl flex flex-col gap-3">
             <p>All of your data, including your profile, organizations, and personal information, will be permanently removed. </p>
             <p>By entering your email, you confirm that you understand and accept the consequences of deleting your account.</p>
