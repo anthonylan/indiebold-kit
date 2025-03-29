@@ -160,9 +160,17 @@ This ensures that only resources associated with the user's selected organizatio
 
 Team-related functions are in `composables/useTeam.ts`.
 
-## Illustrations Used
 
-[Figma File](https://www.figma.com/design/Js6iAQUDFmPE0e4bwoDVkV/510-Abstract-Illustrations-%E2%80%93-New-York-vector-illustrations-set-%28svg-png%29-%28Community%29?node-id=1140-5&p=f&t=uEvVVikHrl2aMTnA-0)
+## Deployment
+This project is deployed on Netlify, which is why the environment variable SERVER_PRESET=netlify_edge is set. If you plan to deploy your app to other cloud platforms like Vercel, etc. [Please refer to the documentation here](https://nuxt.com/deploy)
+
+
+
+### credit
+[Illustrations Used](https://www.figma.com/design/Js6iAQUDFmPE0e4bwoDVkV/510-Abstract-Illustrations-%E2%80%93-New-York-vector-illustrations-set-%28svg-png%29-%28Community%29?node-id=1140-5&p=f&t=uEvVVikHrl2aMTnA-0)
+
+
+
 
 ## Support
 If you have any questions or run into an issue you’re struggling to solve, feel free to contact me on Instagram (I respond faster there) or reach out via email at hello@indiebold.com.
