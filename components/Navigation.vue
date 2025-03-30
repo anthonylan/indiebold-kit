@@ -14,7 +14,7 @@
           <NuxtLink :to="link.path" class="text-gray-800 border border-transparent rounded-lg flex gap-2 items-center p-1.5 px-3" 
          :class="[link.path == route.path ? 'bg-gray-100 hover:bg-gray-100 dark:bg-[var(--dark-soft)]' : '', styleSheet.hoverItem]">
             <i class="text-xl" :class="link.icon"></i>
-            <span class="text-md font-normal flex-1 translate-y-[2px]">{{ link.name }}</span>
+            <span class="text-md font-normal flex-1">{{ link.name }}</span>
           </NuxtLink>
         </li>
       </ul>
