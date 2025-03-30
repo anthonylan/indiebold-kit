@@ -25,15 +25,14 @@ const store = shallowReactive({
 
   //sync organization
   async syncOrgs() {
-    const { fetchUserLinkedOrgs } = useDatabase()    
+    const { fetchUserLinkedOrgs } = useDatabase()        
 
     // Fetch latest user organizations
     const { data } = await fetchUserLinkedOrgs(store.user?.email as string)    
-    store.organizations = data    
-
+    store.organizations = data 
 
     //prompt the user to create a new organization
-    if(data?.length == 0) stateMemory.showOrgForm = true
+    if(data?.length == 0) stateMemory.showOrgForm = true    
 
     
     const savedOrganization = store.organizations.find((item: any) => item.id == localStorage.getItem('org_id'))

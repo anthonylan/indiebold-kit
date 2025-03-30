@@ -43,11 +43,13 @@ const handleSubmit = async () => {
     }
 
     await updateUser({ display_name, referral, country, boarded: true, customer  })
-    nextTick(() =>  store.syncUser())
+    loading.value = false
+    stateMemory.showOrgForm = false
 
     //create organization for this user
-    loading.value = false
-    if(org_name) handleNext() 
+    if(org_name) return handleNext() 
+    nextTick(() =>  store.syncUser())
+
 }
 
 
@@ -55,7 +57,7 @@ const handleNext = async () => {
     const { error } =  await handleOrgCreation(store.user, form.value.org_name)
     if(error) return toast.add({ msg: error, type: 'error' })
 
-    store.syncOrgs()
+    nextTick(() =>  store.syncUser())
 }
 
 
@@ -67,7 +69,7 @@ const handleNext = async () => {
 
 <template>
     <div class="fixed z-999 bg-white h-screen w-full top-0 overflow-y-auto">
-      <form @submit.prevent="handleSubmit" class="max-w-md m-auto pb-10 px-10">
+      <form @submit.prevent="handleSubmit" class="max-w-md m-auto pb-50 md:pb-10 px-10">
         <div class="flex flex-col gap-2 text-center p-4">
             <img src="~/assets/images/ask.svg" width="140" alt="ballon" class="mx-auto">
             <h1 class="text-2xl font-bold" :class="[styleSheet.title]">Almost done!</h1>
@@ -82,7 +84,7 @@ const handleNext = async () => {
 
         <div class="flex flex-col gap-2 my-5" v-if="store.organizations?.length == 0">
             <label for="" :class="[styleSheet.form.label]">What's the name of your organization?</label>
-            <input type="text" placeholder="Workspace name" v-model="form.org_name" :class="[styleSheet.form.input]" required>
+            <input type="text" placeholder="Organization name" v-model="form.org_name" :class="[styleSheet.form.input]" required>
         </div>
 
         <div class="flex flex-col gap-2 my-5">

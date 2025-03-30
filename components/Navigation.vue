@@ -76,12 +76,12 @@ const links = ref([
 
 const toggleModalbyMenu = (value: 'showTeam' | 'showOrgForm') => {
   closeAllMenus()
-  setTimeout(() =>  stateMemory[value] = true, 300);
+  setTimeout(() =>  stateMemory[value] = true, 300);  
 }
 
 
 onMounted(() => {
-  store.syncUser()
+  store.syncUser()  
 })
 
 
