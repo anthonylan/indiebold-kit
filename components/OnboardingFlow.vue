@@ -77,7 +77,7 @@ const handleNext = async () => {
         </div>
 
         <div class="flex flex-col gap-2 mt-10">
-            <label for="" :class="[styleSheet.form.label]">Tell us more about you</label>
+            <label for="" :class="[styleSheet.form.label]">Share a bit about yourself</label>
             <input type="text" placeholder="Your name" v-model="form.display_name" :class="[styleSheet.form.input]">
             <input type="text" placeholder="Your country" v-model="form.country" :class="[styleSheet.form.input]" required>
         </div>
@@ -88,7 +88,7 @@ const handleNext = async () => {
         </div>
 
         <div class="flex flex-col gap-2 my-5">
-            <label for="" :class="[styleSheet.form.label]">We'd love to know how you found Indiebold ✨ </label>
+            <label for="" :class="[styleSheet.form.label]">How did Indiebold come your way? ✨</label>
             <div class="flex gap-2 flex-wrap">
             <span v-for="disc in referrals" :class="[styleSheet.btn.baseStyle, form.referral == disc ? 'bg-white border dark:bg-[var(--dark-soft)] dark:border-[var(--dm-line)]' : styleSheet.btn.variants.secondary, 'uppercase text-[13px]']" @click="form.referral = disc">{{ disc }}</span>
             </div>
