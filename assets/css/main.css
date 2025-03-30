@@ -1,6 +1,6 @@
 
 @import url('https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 
 
@@ -9,7 +9,7 @@
 
 /* dm: Dark Mode */
 :root{
-    --font-family: "Nunito", sans-serif;
+    --font-family: "Lato", sans-serif;
     --blue: #193DB0;
     --dark: rgb(14, 18, 27);
     --gray: #99a0ae;
