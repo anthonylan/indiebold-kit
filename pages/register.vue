@@ -11,7 +11,7 @@
              <div class="flex flex-col gap-1 my-7">
                 <div class="flex flex-col gap-1">
                   <label for="" :class="styleSheet.form.label">Full name</label>
-                  <input placeholder="Jane Mathew" v-model="form.name" :class="[styleSheet.form.input]" required />
+                  <input placeholder="Jane Darwell" v-model="form.name" :class="[styleSheet.form.input]" required />
               </div>
                <Email v-model="form.email" label="Email address" id="login-email" required class="my-3" />
                <Password v-model="form.password" id="login=pw" label="Password" />
