@@ -9,17 +9,23 @@ const toast = useToast()
 
 const { workSpaceMembers, delTeam, fetchTeamMembers, syncUserId, handleTeamDeletion } = useTeam();
 const loading = ref(true)
+const count = ref(0)
 
 watchEffect(() => {
   if (store.selectedOrg?.id) {
-    syncUserId();
-    fetchTeamMembers();  
+   count.value++
 
     nextTick(() => {
       loading.value = false  
     })
   }
 });
+
+watch(count, (old, newVal) => {
+  if(newVal > 1) return // Prevent it from running multiple times
+  syncUserId();
+  fetchTeamMembers(); 
+})
 
 
 // Note: `workSpaceMembers` contains the actual data you need. Everything below is just for managing its visibility.  
@@ -29,7 +35,6 @@ watchEffect(() => {
 
 
 const searchExcluded = ref([]) as any
-
 const keys = ref({ tab: 'All', search: '', sortby: 'org_role', loaded: false });
 const sorting = [
   { label: 'Email', value: 'email' },
@@ -70,6 +75,9 @@ const combineSearchAndStatusFilters = computed(() => {
     return !excluded.value.includes(item?.email) && !searchExcluded.value.includes(item?.email)
   })
 })
+
+
+
 
 
 </script>
