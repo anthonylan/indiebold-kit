@@ -74,11 +74,11 @@ const handleUpload = async (event: any) => {
             <ClientOnly><img :src="avatarUrl(store.user)" :class="[styleSheet.avatarImg]" alt="avatar" referrerpolicy="no-referrer"></ClientOnly>
           </div>
           <div class="flex flex-col">
-            <h2 class="text-lg font-bold" :class="[styleSheet.title]">Custom avatar</h2>
+            <h2 class="text-xl font-bold font-title" :class="[styleSheet.title]">Custom avatar</h2>
             <p>Help your team recognize you in organizations</p>
-            <div class="w-auto relative mt-3">
-                <input type="file" class="absolute left-0 top-0 border z-5 h-full opacity-0 cursor-pointer w-[150px]"  @input="handleUpload">
-                <ButtonBase variant="secondary" :loading="loading" icon="ri-upload-2-line">Upload</ButtonBase>
+            <div class="w-auto relative mt-3 cursor-pointer">
+                <input type="file" class="absolute left-0 top-0 border z-5 h-full opacity-0 !cursor-pointer w-[150px]"  @input="handleUpload">
+                <ButtonBase variant="secondary" class="rounded-full" :loading="loading" icon="ri-upload-2-line">Upload</ButtonBase>
             </div>
           </div>
          </div>

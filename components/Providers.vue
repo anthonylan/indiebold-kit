@@ -1,6 +1,6 @@
 <template>
-    <div class="flex justify-center gap-3">
-        <button v-for="provider in providers" :key="provider.name" :class="[styleSheet.btn.baseStyle, styleSheet.hoverItem]" @click="handleOAuth(provider.name)">
+    <div class="flex justify-center gap-3 my-5">
+        <button v-for="provider in providers" :key="provider.name" :class="[styleSheet.btn.baseStyle, styleSheet.btn.variants.secondary, 'rounded-full']" @click="handleOAuth(provider.name)">
             <img v-if="provider?.img" :src="provider?.img" :alt="provider.img" :width="provider.size">
             <i v-else :class="[provider.icon, 'text-2xl']"></i> 
              <span class="text-md capitalize">{{ provider.name }}</span>

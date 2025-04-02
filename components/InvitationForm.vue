@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="handleSubmit" class="flex flex-col p-5 gap-4 m-auto w-full md:w-[680px]">
         <div class="flex flex-col gap-1">
-            <h2 class="text-xl font-bold" :class="[styleSheet.title]">Invite others to {{ store.selectedOrg?.name }}</h2>
+            <h2 class="text-2xl font-bold font-title" :class="[styleSheet.title]">Invite others to {{ store.selectedOrg?.name }}</h2>
             <p class="text-sm">Invite others to collaborate in IndieBold! Due to high demand, invites are limited to 3 per organization. Regardless of delivery, teammates will join your org when they sign up with the invited email.</p>
         </div>
 
@@ -25,8 +25,8 @@
         <div class="flex border-t my-2" :class="[styleSheet.border]"></div>
 
         <div class="flex justify-end gap-3">
-          <button :class="[styleSheet.btn.baseStyle, styleSheet.btn.variants.secondary]" type="button" @click="$emit('close')">Cancel</button>
-          <button :class="[styleSheet.btn.baseStyle, styleSheet.btn.variants.primary]" type="submit">Invite team member</button>
+          <ButtonBase variant="secondary" class="rounded-full" type="button" @click="$emit('close')">Cancel</ButtonBase>
+          <ButtonBase variant="primary" class="rounded-full" type="submit">Invite team member</ButtonBase>
        </div>
     </form>
 </template>

@@ -1,8 +1,8 @@
 <template>
-  <aside :class="[styleSheet.card, styleSheet.sidebar.content, stateMemory.mobileMenu ? '-translate-x-0' : '-translate-x-[300px]']">
-    <div :class="[styleSheet.border, 'flex items-center gap-3 h-20 border-b px-4']">
-        <img src="../assets/images/logo-icon.svg" width="50"  alt="">
-        <span :class="[styleSheet.title]" class="text-xl font-black">logo here</span>
+  <aside :class="[styleSheet.card, styleSheet.sidebar.content, styleSheet.border, stateMemory.mobileMenu ? '-translate-x-0' : '-translate-x-[300px]']">
+    <div :class="[styleSheet.border, 'flex items-center gap-3 h-15 border-b px-4']">
+        <img src="../assets/images/logo-icon.svg" width="40"  alt="logo">
+        <span :class="[styleSheet.title]" class="text-lg font-bold uppercase">bold</span>
     </div>
 
     <!-- links -->
@@ -11,8 +11,8 @@
         <li v-for="link in links">
           <span v-if="link.seperator" class="flex text-sm text-gray-500 font-medium m-3">{{ link.seperator }}</span>
 
-          <NuxtLink :to="link.path" class="text-gray-800 border border-transparent rounded-lg flex gap-2 items-center p-1.5 px-3" 
-         :class="[link.path == route.path ? 'bg-gray-100 hover:bg-gray-100 dark:bg-[var(--dark-soft)]' : '', styleSheet.hoverItem]">
+          <NuxtLink :to="link.path" class="text-gray-800 border border-transparent flex gap-2 items-center p-1.5 px-3" 
+         :class="[link.path == route.path ? 'bg-gray-200 hover:bg-gray-100 dark:bg-[var(--dark-soft)]' : '', styleSheet.hoverItem]">
             <i class="text-xl" :class="link.icon"></i>
             <span class="text-md font-normal flex-1">{{ link.name }}</span>
           </NuxtLink>

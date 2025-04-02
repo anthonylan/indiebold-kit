@@ -1,13 +1,13 @@
 <template>
     <div class="flex flex-1">
-      <div class="relative flex justify-center w-auto bg-gray-100 rounded-lg p-1 h-10 dark:bg-[var(--dark-soft)]">
+      <div class="relative flex justify-center w-auto bg-white px-1 h-10.5 dark:bg-[var(--dark-soft)] border rounded-full" :class="[styleSheet.border]">
         <!-- Sliding Indicator -->
-        <div class="absolute left-0 top-1 h-8 bg-white shadow rounded-lg transition-all duration-300 dark:bg-[var(--dark)]" 
+        <div class="absolute left-0 top-1 h-8 bg-[#bee0ef] transition-all duration-300 dark:bg-[var(--dark)] rounded-full" 
         :style="{ width: `${tabWidth}px`, transform: `translateX(${tabPosition}px)` }"></div>
   
         <!-- Tab Buttons -->
-        <button v-for="(item, index) in tabs" :key="item" ref="tabButtons" class="relative z-10 px-5 border-0 transition-colors duration-300 cursor-pointer" 
-          :class="item === modelValue ? `${styleSheet.title}` : 'text-gray-500'"
+        <button v-for="(item, index) in tabs" :key="item" ref="tabButtons" class="relative z-10 px-4 border-0 transition-colors duration-300 cursor-pointer" 
+          :class="item === modelValue ? `${styleSheet.title}` : ''"
           @click="selectTab(item, index)" >
           {{ item }}
         </button>

@@ -2,7 +2,7 @@
     <div class="flex flex-col p-5 w-full md:w-[450px] mx-auto">
         <div class="flex items-start">
             <div class="flex flex-col flex-1">
-                <h1 class="text-xl font-bold" :class="[styleSheet.title]">Create an organization </h1>
+                <h1 class="text-2xl font-bold font-title" :class="[styleSheet.title]">Create an organization </h1>
                 <p class="text-md">Organizations gather people building together.</p>
             </div>
             <button class="cursor-pointer" @click="$emit('close')"><i class="ri-close-line text-2xl"></i></button>
@@ -17,8 +17,8 @@
           <div class="flex border-t my-5" :class="[styleSheet.border]"></div>
 
          <div class="flex gap-3 justify-end">
-            <button :class="[styleSheet.btn.baseStyle, styleSheet.btn.variants.secondary]" type="button" @click="$emit('close')">Cancel</button>
-            <button :class="[styleSheet.btn.baseStyle, styleSheet.btn.variants.primary]" type="submit">Create organization</button>
+            <ButtonBase variant="secondary" class="rounded-full" type="button" @click="$emit('close')">Cancel</ButtonBase>
+            <ButtonBase variant="primary" class="rounded-full" type="submit">Create organization</ButtonBase>
          </div>
         </form>
     </div>

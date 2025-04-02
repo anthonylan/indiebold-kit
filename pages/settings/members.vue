@@ -30,7 +30,7 @@ watchEffect(() => {
 
 const searchExcluded = ref([]) as any
 
-const keys = ref({ tab: 'All', search: '', sortby: 'org_role' });
+const keys = ref({ tab: 'All', search: '', sortby: 'org_role', loaded: false });
 const sorting = [
   { label: 'Email', value: 'email' },
   { label: 'Level', value: 'org_role' },
@@ -61,17 +61,15 @@ const sortMembers = (field: string) => {
 const searchUsers = () => {
   const query = keys.value.search.toLowerCase();
   searchExcluded.value = workSpaceMembers.value.filter(user => 
-    !user.email.toLowerCase().includes(query)).map((item) => item.email)
+    !user?.email?.toLowerCase().includes(query)).map((item) => item?.email)
 }
 
 
 const combineSearchAndStatusFilters = computed(() => {
-  return workSpaceMembers.value?.filter((item: any) => !excluded.value.includes(item.email) && !searchExcluded.value.includes(item.email))
+  return workSpaceMembers.value?.filter((item: any) => {
+    return !excluded.value.includes(item?.email) && !searchExcluded.value.includes(item?.email)
+  })
 })
-
-
-
-
 
 
 </script>
@@ -83,7 +81,7 @@ const combineSearchAndStatusFilters = computed(() => {
 
  <!-- top header -->
  <TopHeader title="Members" :loading="loading">
-      <ButtonBase variant="primary" icon="ri-add-large-line" @click="stateMemory.showTeam = true" :disabled="store.userLevel?.role > 0 || !store.selectedOrg?.id">Add Member</ButtonBase>
+      <ButtonBase variant="primary" icon="ri-add-large-line" class="rounded-full" @click="stateMemory.showTeam = true" :disabled="store.userLevel?.role > 0 || !store.selectedOrg?.id">Add Member</ButtonBase>
   </TopHeader>
 
 
@@ -108,7 +106,8 @@ const combineSearchAndStatusFilters = computed(() => {
    </div>
 
    <!-- member's table -->
-    <div class="max-w-full overflow-x-auto">
+ <div class="max-w-full overflow-x-auto relative">
+
     <table :class="[styleSheet.table.main]">
       <thead>
         <tr>

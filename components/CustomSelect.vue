@@ -9,7 +9,7 @@
     </div>
 
     <!-- Dropdown menu -->
-    <div v-if="isOpen"  class="absolute z-10 overflow-hidden w-full mt-1 shadow border" :class="[styleSheet.card]">
+    <div v-if="isOpen"  class="absolute z-10 overflow-hidden w-full mt-1 shadow border" :class="[styleSheet.card, styleSheet.border]">
     <ul class="overflow-hidden text-sm max-h-60">
         <li v-for="option in options" :key="option.value" @click="selectOption(option)"
         class="relative m-1 px-3 py-1.5" :class="[selectedOption && selectedOption.value === option.value ? 'bg-gray-100 dark:bg-[var(--dark-soft)]' : '', styleSheet.hoverItem]">

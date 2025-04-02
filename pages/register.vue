@@ -17,14 +17,14 @@
                <Password v-model="form.password" id="login=pw" label="Password" />
                <small class="text-gray-500"><i class="ri-information-fill"></i> Must contain 1 uppercase letter, 1 number, min. 8 characters.</small>
              </div>
-             
              <ButtonBase variant="primary" :disabled="loading" class="w-full h-11">Continue</ButtonBase>
-             <div class="text-center py-4">
-               <p class="text-md font-light"> By clicking Continue, you agree to accept IndieBold <a href="#" :class="[styleSheet.form.link]">Terms of Service</a></p>
-             </div>
          </form>
-         <div class="flex menu-separator"></div>
-         <div class="text-center text-sm">Or sign up with</div>
+
+         <div class="relative text-center mt-5">
+          <div class="flex menu-separator"></div>
+          <div class="text-center text-sm mt-5 absolute -top-[50%] left-[50%] -translate-[50%] px-2" :class="[styleSheet.card]">Or sign up with</div>
+         </div>
+         
          <Providers />
      </template>
   </Wrapper>

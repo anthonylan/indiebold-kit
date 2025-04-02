@@ -15,6 +15,7 @@ const subGrid = ref<{ title: string; value: string }[]>([]);
 const loading = ref(false);
 const keys = ref({ cycle: 'Pay monthly', loader: true });
 const billingCycle = computed(() => (keys.value.cycle === 'Pay monthly' ? 0 : 1));
+const planSelect = ref(table[0].prices[0])
 
 const handleTabs = (status: string) => {
   keys.value.cycle = status;
@@ -26,6 +27,7 @@ const fetchData = async () => {
 
   subs.value = response.subscriptions.data;
   defSub.value = subs.value.length > 0 ? subs.value[0] : null;
+  planSelect.value = defSub.value?.plan?.id
 
   if (defSub.value?.id) {
     defaultSub.value = table.find((item) => item.prices.includes(defSub.value?.plan?.id));
@@ -66,7 +68,7 @@ watchEffect(() => {
 
 <ClientOnly><Navigation /></ClientOnly>
 
-<TopHeader title="User billing" :loading="keys.loader" />
+<TopHeader title="Billing" :loading="keys.loader" />
 
 
 
@@ -80,63 +82,77 @@ watchEffect(() => {
   </section>
 
  <section class="max-w-2xl" v-else>
-  <!-- subscription -->
-    <div class="flex flex-col">
-      <h2 class="text-lg">{{  defaultSub?.name ? `Your subscription is active, and you're all set!` : `You’re not subscribed to a plan yet`  }}</h2>
-      <h2 class="text-lg">{{ defaultSub?.name ? `Enjoy uninterrupted access to all our features, so cool don't you think?` : 'Start your subscription to continue using bold.' }}</h2>
-    </div>
-
-    <div class="p-0 mt-5" v-if="defaultSub?.name">
-      <div class="flex flex-col gap-5 p-5 border" :class="[styleSheet.card]">
-        <div class="flex items-end flex-col md:flex-row">
-          <div class="flex gap-10 flex-1">
-          <div class="flex flex-col gap-1" v-for="(item, index) in subGrid">
-            <p class="text-sm capitalize" :class="[styleSheet.hl]">{{ item.title }}</p>
-            <p class="text-md">{{ item?.value }}</p>
+ 
+    <!-- subscription -->
+    <div class="mb-10" v-if="defaultSub?.name">
+      <div class="p-4 border" :class="[styleSheet.card, styleSheet.border]">
+        <div class="flex gap-3 mb-4">
+          <div class="size-12 flex items-center justify-center bg-[#bee0ef] text-black rounded-full">
+            <i class="ri-vip-crown-2-fill text-xl"></i>
           </div>
+        <div class="flex flex-col flex-1 gap-0.5">
+           <div class="flex gap-2">
+            <span class="font-bold font-title text-xl">{{ defaultSub.name }} plan</span>
+             <div><span :class="[styleSheet.umenu.tag, 'capitalize p-0.5']">{{ defSub.status }}</span></div>
+           </div>
+           <p class="text-gray-500">
+            Billing <span class="capitalize">{{ defSub.plan.interval }}ly</span> &#183; 
+            Next invoice on {{ dayjs(defSub?.current_period_end * 1000).format('MMM DD') }} for ${{ (defSub?.plan.amount / 100).toFixed(2) }}
+          </p>
         </div>
-        <div class="flex justify-end w-full md:w-auto pt-4">
-          <ButtonBase variant="primary" icon="ri-money-dollar-circle-line" :loading="loading" @click="handlePortal" class="w-full">Manage</ButtonBase>
-        </div>
-        </div>
+       </div>
+       <ButtonBase variant="secondary" icon="ri-money-dollar-circle-line" :loading="loading" @click="handlePortal" class="w-full">Manage subscription</ButtonBase>
       </div>
     </div>
 
 
 
-
   <!-- Pricing -->    
-    <div class="grid grid-cols-1  gap-6 mt-6">
-        <div class="flex flex-col gap-2 p-4 rounded-lg border " :class="[styleSheet.card]" v-for="item in table">
-            <div class="flex md:items-center flex-col md:flex-row gap-2">
-                <h2 class="text-xl font-medium flex-1 ">{{ item.name }}</h2>
-                <div class="flex" v-if="item.prices.length > 1">
-                  <ButtonTabs :tabs="['Pay monthly', 'Pay yearly']" v-model="keys.cycle" @change="handleTabs" />
-                </div>
+   <div class="flex items-center my-5">
+     <h3 class="flex-1 text-2xl font-bold font-title">Select plan</h3>
+     <div class="flex">
+        <ButtonTabs :tabs="['Pay monthly', 'Pay yearly']" v-model="keys.cycle" @change="handleTabs" />
+      </div>
+    </div>
+
+   <div class="grid grid-cols-1  -space-y-2">
+      <div class="flex flex-col gap-2 border" 
+        :class="[styleSheet.card, styleSheet.border]" 
+        :style="[item.prices.includes(planSelect) ? 'width:calc(100% + 10px); transform:translateX(-5px)' : '']" v-for="item in table">
+           
+            <div class="flex flex-col  cursor-pointer group p-4" @click="planSelect = item.prices[0]">
+              <div class="flex">
+                <h2 class="flex-1">{{ item.name }}</h2>
+                <span class="size-4 rounded-full relative border group-hover:bg-gray-200" :class="[styleSheet.border]">
+                  <i v-if="item.prices.includes(planSelect)" class="ri-checkbox-circle-fill absolute top-[50%] -translate-y-[50%]"></i>
+                </span>
+              </div>
+              <div class="flex items-center gap-1 font-title" :class="[styleSheet.title]">
+                <h1 class="font-bold text-3xl">${{ item.costs.length == 1 ? item.costs[0] : item.costs[billingCycle] }} </h1>
+                <span class="text-md font-medium">/ month</span>
+              </div>
             </div>
-            <div class="flex items-center gap-1 mt-3 " :class="[styleSheet.title]">
-                <span class="text-sm">$</span>
-                <h1 class="font-bold text-3xl">{{ item.costs.length == 1 ? item.costs[0] : item.costs[billingCycle] }} </h1>
-                <span class="text-sm font-medium">/month</span>
-            </div>
-            <p class=" max-w-md">{{ item.desc }}</p>
-          
-            <h2 class="text-sm font-medium mt-5 ">Everything included:</h2>
-            <ul>
-                <li class="flex mt-2 gap-2 text-sm " v-for="feat in item.features">
-                    <i class="ri-checkbox-circle-line"></i> <span>{{ feat }}</span>
+
+            <div v-if="item.prices.includes(planSelect)" class="p-4 pt-0">
+               <div class="flex menu-separator"></div>
+               <p class="max-w-md mb-5 mt-7">{{ item.desc }}</p>
+
+              <ul class="grid grid-cols-2">
+                <li class="flex items-center gap-2 text-sm " v-for="feat in item.features">
+                    <i class="ri-check-line text-xl"></i> <span>{{ feat }}</span>
                 </li>
-            </ul>
-            <div class="flex flex-col mt-3">
+             </ul>
+             <div class="flex flex-col mt-5">
                 <ClientOnly>
-                    <ButtonBase v-if="subs.length > 0"  variant="secondary" :loading="loading" :disabled="activeSub(item)" @click="handleSwitch">
-                      {{ activeSub(item) ? `Current` : `Update`  }} plan
+                    <ButtonBase v-if="subs.length > 0"  variant="primary" :loading="loading" :disabled="activeSub(item)" @click="handleSwitch">
+                      {{ activeSub(item) ? `Current` : `Switch`  }} plan
                     </ButtonBase>
-                    <ButtonBase  v-else  variant="secondary" icon="ri-money-dollar-circle-line"  :loading="loading" 
+                    <ButtonBase  v-else  variant="primary"  :loading="loading" 
                       @click="handleCheckout(item.prices.length == 1 ? item.prices[0] : item.prices[billingCycle])"> Subscribe to {{  item.name }}
                     </ButtonBase>
                 </ClientOnly>
             </div>
+           </div>
           </div>
         </div>
 

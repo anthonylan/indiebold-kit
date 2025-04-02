@@ -3,27 +3,31 @@
     <template #link>
        <div :class="[styleSheet.form.linkWrap]">
           <p :class="[styleSheet.form.htext]">Don't have an account yet?</p>
-          <NuxtLink to="/register" :class="[styleSheet.form.link]"> Sign up now</NuxtLink>
+          <NuxtLink to="/register" :class="[styleSheet.form.link]"> Sign up</NuxtLink>
         </div>
     </template>
       
       <template #form> 
           <form @submit.prevent="submit">
-              <div class="flex flex-col gap-5 my-7">
+              <div class="flex flex-col gap-5 my-4">
                 <Email v-model="form.email" label="Email address" id="login-email" required />
-                <Password v-model="form.password" id="login=pw" label="Password">
-                  
-                </Password>
+                <Password v-model="form.password" id="login-pw" label="Password" />
               </div>
               
-              <ButtonBase variant="primary" :disabled="loading" class="w-full h-11">Log in</ButtonBase>
-              <div class="text-center py-4">
-                <NuxtLink to="/password/reset" :class="[styleSheet.form.link]">Forgot your password?</NuxtLink>
-
+              <div class="flex pb-4">
+                <p class="flex-1 flex items-center gap-2">
+                  <input type="checkbox" class="size-4 accent-black" />
+                  Remember me
+                </p>
+                <NuxtLink to="/password/reset" :class="[styleSheet.form.link]">Forgot password?</NuxtLink>
               </div>
+              <ButtonBase variant="primary" :disabled="loading" class="w-full h-11">Log in</ButtonBase>
           </form>
-          <div class="flex menu-separator"></div>
-          <div class="text-center text-sm">Or log in with</div>
+
+            <div class="relative text-center mt-5">
+             <div class="flex menu-separator"></div>
+             <div class="text-center text-sm mt-5 absolute -top-[50%] left-[50%] -translate-[50%] px-2" :class="[styleSheet.card]">Or log in with</div>
+           </div>
           <Providers />
       </template>
    </Wrapper>

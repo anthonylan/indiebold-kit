@@ -1,6 +1,6 @@
 <template>
-<div v-if="store.user" :class="[styleSheet.umenu.content, styleSheet.card]">
-  <div :class="styleSheet.umenu.row">
+<div v-if="store.user" :class="[styleSheet.umenu.content, styleSheet.card, styleSheet.border]">
+  <div :class="[styleSheet.umenu.row, styleSheet.border]">
     <span :class="[styleSheet.umenu.label, '!mt-0', styleSheet.hl]">Signed in as</span>
 
     <div class="flex gap-2 m-2">
@@ -15,7 +15,7 @@
   </div>
 
   <!-- current organization -->
-  <div :class="styleSheet.umenu.row" v-if="store.selectedOrg?.id">
+  <div :class="[styleSheet.umenu.row, styleSheet.border]" v-if="store.selectedOrg?.id">
     <span :class="[styleSheet.umenu.label, styleSheet.hl]">current organization</span>
 
     <div :class="[styleSheet.umenu.link, styleSheet.hoverItem]" @click="editMode = true" v-if="!editMode">
@@ -37,7 +37,7 @@
   </div>
 
     <!-- other organization -->
-    <div :class="styleSheet.umenu.row">
+    <div :class="[styleSheet.umenu.row, styleSheet.border]">
     <span :class="[styleSheet.umenu.label, styleSheet.hl]">other organizations</span>
 
     <div :class="[styleSheet.umenu.link, styleSheet.hoverItem]"  v-for="ws in store.organizations.filter((item: any) => item.id != store.selectedOrg?.id)" @click="store.setCurrentOrganizzation(ws)">
@@ -52,11 +52,11 @@
    <ButtonBase variant="secondary" icon="ri-add-large-line" @click="$emit('newOrg')" :class="[styleSheet.btn.link]" :disabled="store.organizations.length > 4">New organization</ButtonBase>
   </div>
 
-  <div :class="styleSheet.umenu.row">
+  <div :class="[styleSheet.umenu.row, styleSheet.border]">
     <ButtonBase variant="secondary" :icon="`text-xl ${colorMode == 'dark' ? 'ri-moon-line' : 'ri-sun-line'}`" @click="toggleDarkMode" :class="[styleSheet.btn.link]">
       <span class="capitalize">{{ colorMode }}</span> theme
     </ButtonBase>
-    <ButtonBase variant="secondary" icon="ri-question-line text-xl" :class="[styleSheet.btn.link]" @click="openSupportWindow">Support</ButtonBase>
+    <ButtonBase variant="secondary" icon="ri-shopping-cart-line text-xl" :class="[styleSheet.btn.link]" @click="openSupportWindow">Purchase—$199</ButtonBase>
   </div>
   <div class="pt-2 flex flex-col">
     <ButtonBase variant="secondary" icon="ri-logout-box-r-line text-xl" @click="store.logout()" :class="[styleSheet.btn.link]">
@@ -88,5 +88,5 @@ const handleOrgRename = async () => {
 }
 
 
-const openSupportWindow = () => window.open('mailto:hello@indiebold.com', '_blank')
+const openSupportWindow = () => window.open('https://buy.stripe.com/00g8wx86p9x5aIg3ch', '_blank')
 </script>

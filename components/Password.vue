@@ -1,9 +1,6 @@
 <template>
     <div class="flex flex-col gap-1">
-      <div class="flex">
-        <label :for="id" class="flex-1">{{ label }}</label>
-        <slot name="forgotpassword"></slot>
-      </div>
+      <label :for="id" class="flex-1">{{ label }}</label>
       <div class="flex relative group">
         <input :id="id" placeholder="••••••••••" :type="showPassword ? 'text' : 'password'" 
           :class="[styleSheet.form.input, 'pl-10']" :value="modelValue" @input="onInput" required

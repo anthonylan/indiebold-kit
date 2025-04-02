@@ -1,7 +1,7 @@
 <template>
     <Teleport to="body">
       <transition name="fade">
-        <div v-if="modelValue" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" @click.self="close">
+        <div v-if="modelValue" class="fixed inset-0 z-999 flex items-center justify-center bg-black/50" @click.self="close">
           <div class="overflow-hidden" :class="[styleSheet.card]" @keyup.esc="close">
             <slot></slot>
           </div>
