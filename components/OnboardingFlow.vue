@@ -84,7 +84,7 @@ const handleNext = async () => {
 
         <div class="flex flex-col gap-2 my-5" v-if="store.organizations?.length == 0">
             <label for="" :class="[styleSheet.form.label]">What's the name of your organization?</label>
-            <input type="text" placeholder="Organization name" v-model="form.org_name" :class="[styleSheet.form.input]" required>
+            <input type="text" placeholder="Acme inc." v-model="form.org_name" :class="[styleSheet.form.input]" required>
         </div>
 
         <div class="flex flex-col gap-2 my-5">

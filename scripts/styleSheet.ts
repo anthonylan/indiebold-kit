@@ -40,7 +40,7 @@ export default {
     title: `text-black dark:text-white`,
     hl: `text-gray-600 dark:text-[var(--gray-soft)]`,
     hoverItem: `cursor-pointer hover:bg-gray-200 dark:hover:bg-[var(--dark-soft)] dark:text-[var(--gray)]`,
-    avatarCover: `overflow-hidden rounded-full bg-gray-200 dark:bg-[var(--dark-soft)]`,
+    avatarCover: `overflow-hidden rounded-full`,
     avatarImg: `object-cover w-full h-full`,
     sidebar: {
         content: `w-[250px] h-screen fixed left-0 top-0 z-40 flex flex-col gap-3 border-r lg:-translate-x-0 transition-all duration-200`

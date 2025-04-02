@@ -56,7 +56,7 @@
     <ButtonBase variant="secondary" :icon="`text-xl ${colorMode == 'dark' ? 'ri-moon-line' : 'ri-sun-line'}`" @click="toggleDarkMode" :class="[styleSheet.btn.link]">
       <span class="capitalize">{{ colorMode }}</span> theme
     </ButtonBase>
-    <ButtonBase variant="secondary" icon="ri-shopping-cart-line text-xl" :class="[styleSheet.btn.link]" @click="openSupportWindow">Purchase—$199</ButtonBase>
+    <ButtonBase variant="secondary" icon="ri-question-line text-xl" :class="[styleSheet.btn.link]">Support</ButtonBase>
   </div>
   <div class="pt-2 flex flex-col">
     <ButtonBase variant="secondary" icon="ri-logout-box-r-line text-xl" @click="store.logout()" :class="[styleSheet.btn.link]">

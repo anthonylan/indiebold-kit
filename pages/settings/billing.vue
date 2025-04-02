@@ -15,7 +15,7 @@ const subGrid = ref<{ title: string; value: string }[]>([]);
 const loading = ref(false);
 const keys = ref({ cycle: 'Pay monthly', loader: true });
 const billingCycle = computed(() => (keys.value.cycle === 'Pay monthly' ? 0 : 1));
-const planSelect = ref(table[0].prices[0])
+const planSelect = ref('')
 
 const handleTabs = (status: string) => {
   keys.value.cycle = status;
@@ -123,7 +123,7 @@ watchEffect(() => {
             <div class="flex flex-col  cursor-pointer group p-4" @click="planSelect = item.prices[0]">
               <div class="flex">
                 <h2 class="flex-1">{{ item.name }}</h2>
-                <span class="size-4 rounded-full relative border group-hover:bg-gray-200" :class="[styleSheet.border]">
+                <span class="size-4 rounded-full relative border group-hover:bg-gray-200 dark:group-hover:bg-[#bee0ef]" :class="[styleSheet.border]">
                   <i v-if="item.prices.includes(planSelect)" class="ri-checkbox-circle-fill absolute top-[50%] -translate-y-[50%]"></i>
                 </span>
               </div>

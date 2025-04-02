@@ -4,8 +4,7 @@
            <div class="flex items-start relative md:absolute left-0 top-0 w-full px-5 md:px-10 pt-5">
              <div class="flex flex-1">
               <NuxtLink to="/login">
-                <img v-if="colorMode == 'dark'" src="~/assets/images/logo-white.svg" alt="logo light" width="50">
-                <img v-else src="~/assets/images/logo-icon.svg" alt="logo dark" width="50">
+                <Logo />
               </NuxtLink>
             </div>
             <slot name="link"></slot>
@@ -40,7 +39,6 @@
 
 <script lang="ts" setup>
 import styleSheet from '~/scripts/styleSheet';
-const { colorMode } = useDarkMode();
 
 
 defineProps<{

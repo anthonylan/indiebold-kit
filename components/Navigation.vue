@@ -1,7 +1,7 @@
 <template>
   <aside :class="[styleSheet.card, styleSheet.sidebar.content, styleSheet.border, stateMemory.mobileMenu ? '-translate-x-0' : '-translate-x-[300px]']">
     <div :class="[styleSheet.border, 'flex items-center gap-3 h-15 border-b px-4']">
-        <img src="../assets/images/logo-icon.svg" width="40"  alt="logo">
+        <Logo />
         <span :class="[styleSheet.title]" class="text-lg font-bold uppercase">bold</span>
     </div>
 
