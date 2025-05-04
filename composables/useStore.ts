@@ -13,6 +13,7 @@ const store = shallowReactive({
   organizations: [] as any,
   selectedOrg: {} as any,
   userLevel: {} as Team,
+  event: {views: []} as any,
 
   async syncUser() {
     const { fetchUser } = useAuth()
@@ -44,6 +45,14 @@ const store = shallowReactive({
     if(!store.selectedOrg?.name && store.organizations?.length > 0) {
         store.setCurrentOrganizzation(store.organizations[0])
      }
+  },
+
+  async syncEvents(){
+    if(store.event?.views.length > 0) return
+
+    const supabase = useSupabase()
+    const { data } = await supabase.from('events').select('*').eq('user_id', store.user.id).single()
+    store.event = data || {views: []}
   },
 
   setCurrentOrganizzation(org: any){

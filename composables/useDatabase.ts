@@ -6,6 +6,11 @@ export const useDatabase = () => {
       const { data, error } = await supabase.from(table).select('*')
       return { data, error: error?.message }
     }
+
+    const fetchWithEQ = async (table: string, qs: { key: string, value: any }) => {
+      const { data, error } = await supabase.from(table).select('*').eq(qs.key, qs.value)
+      return { data, error: error?.message }
+    }
   
     // update Existing record
     const  upsertRecord = async (table: string, record: any) => {
@@ -36,6 +41,6 @@ export const useDatabase = () => {
       return { data, error: error?.message }
     }
   
-    return { fetchRecords, insertRecord, upsertRecord, fetchUserLinkedOrgs, updateRecord }
+    return { fetchRecords, insertRecord, upsertRecord, fetchUserLinkedOrgs, updateRecord, fetchWithEQ }
   }
   

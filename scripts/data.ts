@@ -39,12 +39,9 @@ const table = [
 ]
 
 
-const purchaseOptions = {
-    diy: { title: `Purchase—$199`, link: `https://buy.stripe.com/00g8wx86p9x5aIg3ch` },
-    dev: { title: `Purchase—$299`, link: `https://buy.stripe.com/5kA5klaex6kT03C8ww` }
-  }
 
 
 
 
-export { table, purchaseOptions }
+
+export { table }

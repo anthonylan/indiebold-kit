@@ -82,12 +82,14 @@ const toggleModalbyMenu = (value: 'showTeam' | 'showOrgForm') => {
 
 onMounted(() => {
   store.syncUser()  
+
 })
 
 
 watchEffect(() => {
   if(store.user?.email){
    store.syncOrgs()
+   store.syncEvents()
   }
 })
 

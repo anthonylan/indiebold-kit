@@ -172,7 +172,3 @@ This project is deployed on Netlify, which is why the environment variable SERVE
 
 
 
-## Support
-If you have any questions or run into an issue you’re struggling to solve, feel free to contact me on Instagram (I respond faster there) or reach out via email at hello@indiebold.com.
-
-This project is regularly updated and maintained, so you’ll always have access to the latest version.
